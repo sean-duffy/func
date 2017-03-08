@@ -22,9 +22,17 @@ mul n = [n*2, n*3, n*5]
 
 -- Ha!
 data Prog = Prog [Eqn]
+            deriving Show
+
 data Eqn = Eqn Name [Pat] Exp
+           deriving Show
+
 data Pat = PNil | PVar Name | PCons Name Name
+           deriving Show
+
 data Exp = Nil | Var Name | App Name [Exp] | Cons Exp Exp
+           deriving Show
+
 type Name = String
 
 --prog :: Parser Prog
@@ -34,7 +42,7 @@ name :: Parser Name
 name = (many1 (lower .|. upper))
 
 nil :: Parser Exp
-nil = (char "[") .+. (char "]")
+nil = Nil ... ((char '[') .+. (char ']'))
 
 --arg :: Parser Exp
 --arg = 
